@@ -9,8 +9,12 @@ class BasePage {
         this.page = page;
     }
 
-    element(id: string, embedded?: Locator): Locator {
+    elementId(id: string, embedded?: Locator): Locator {
         return embedded ? embedded.getByTestId(id) : this.page.getByTestId(id);
+    }
+
+    elementLabel(label: string, embedded?: Locator): Locator {
+        return embedded ? embedded.getByLabel(label) : this.page.getByLabel(label);
     }
 
     @step("Opening base page")
@@ -28,6 +32,11 @@ class BasePage {
     @step("Filling $0 textbox with '$1' string")
     async fillTextbox(field: Locator, data: string) {
         await field.fill(data);
+    }
+
+    @step("Setting checkbox to $1 state")
+    async setCheckbox(field: Locator, checked: boolean) {
+        await field.setChecked(checked);
     }
 }
 

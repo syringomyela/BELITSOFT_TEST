@@ -2,4 +2,4 @@ export type TextboxFields =| "fullName" | "userEmail" | "currentAddress" | "perm
 
 export type Tabs = 'elements' | 'forms';
 
-export type elementTabs = 'text-box' | 'check-box';
+export type elementTabs = 'text-box' | 'checkbox';

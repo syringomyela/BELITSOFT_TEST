@@ -1,7 +1,7 @@
 import {test,} from "../utils/fixture";
 import testData from "../test-data/testData.json";
 
-test("Fill textboxes", async ({ pages }) => {
+test("Assert textboxes data output", async ({ pages }) => {
     const data = testData.textboxValues;
     await pages.textboxPage.openBasePage();
     await pages.textboxPage.openPage('elements');
