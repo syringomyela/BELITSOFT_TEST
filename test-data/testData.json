@@ -1,0 +1,11 @@
+{
+    "textboxValues": {
+        "fullName": "Denis Petrov",
+        "email": {
+            "correct": "denis.petrov@example.com",
+            "incorrect": "denis.petrov@"
+        },
+        "currentAddress": "3A Kuznetsova St., Chelyabinsk, Chelyabinsk Oblast, Russia",
+        "permanentAddress": "3180 18th Street,San Francisco, United States of America"
+    }
+}
