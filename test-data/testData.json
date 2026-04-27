@@ -1,7 +1,7 @@
 {
     "textboxValues": {
-        "fullName": "Denis Petrov",
-        "email": {
+        "userName": "Denis Petrov",
+        "userEmail": {
             "correct": "denis.petrov@example.com",
             "incorrect": "denis.petrov@"
         },

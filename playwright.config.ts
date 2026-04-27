@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  timeout: 30 * 1000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -25,8 +26,9 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    // baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    baseURL: 'https://demoqa.com',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
     testIdAttribute: 'id',
   },
 
@@ -35,16 +37,6 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
   ],
 });
