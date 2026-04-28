@@ -1,7 +1,10 @@
 # BELITSOFT_TEST
 
 Test task project for Belitsoft using Playwright + TypeScript.
-Task: 3 test cases, validate fields on https://demoqa.com/text-box, assert elements selection by checkbox on https://demoqa.com/checkbox, 1 negative case - invalid email data for https://demoqa.com/text-box
+Task: 3 test cases
+- validation of fields on https://demoqa.com/text-box
+- checkbox selection assertion on https://demoqa.com/checkbox
+- 1 negative test case for invalid email validation on https://demoqa.com/text-box
 
 Architecture - the framework is based on the Page Object Model (POM) pattern using Page Factory and custom fixture initialization.
 
