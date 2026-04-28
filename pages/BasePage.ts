@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 import { step } from "../utils/decorator";
 import { elementTabs, Tabs, TextboxFields } from "../utils/types";
 
@@ -17,6 +17,10 @@ class BasePage {
         return embedded ? embedded.getByLabel(label) : this.page.getByLabel(label);
     }
 
+    tabHref(name: string, embedded?: Locator): Locator {
+        return embedded ? embedded.locator(`//a[@href="/${name}"]`) :this.page.locator(`//a[@href="/${name}"]`);
+    }
+
     @step("Opening base page")
     async openBasePage() {
         await this.page.goto("/");
@@ -25,7 +29,7 @@ class BasePage {
 
     @step("Opening $0 tab via UI")
     async openPage(tab: Tabs | elementTabs) {
-        await this.page.locator(`//a[@href="/${tab}"]`).click();
+        await this.tabHref(tab).click();
         await this.page.waitForLoadState("load");
     }
 
@@ -37,6 +41,11 @@ class BasePage {
     @step("Setting checkbox to $1 state")
     async setCheckbox(field: Locator, checked: boolean) {
         await field.setChecked(checked);
+    }
+
+    @step("Verifying input field error border color is red")
+    async verifyErrorBorder(field: Locator) {
+        await expect(field).toHaveCSS('border', '1px solid rgb(255, 0, 0)');
     }
 }
 

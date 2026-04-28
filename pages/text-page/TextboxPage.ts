@@ -8,21 +8,34 @@ export class TextboxPage extends BasePage {
         super(page);
     }
 
-    @step("Filling textboxes")
+    get elements() {
+        return {
+            submitButton: this.elementId("submit"),
+            outputField: this.elementId("output"),
+        }
+    };
+
+    @step("Filling textboxes on the page")
     async fillTextboxes(data: Record<string, string>) {
         for (const [key, value] of Object.entries(data)) {
             await this.fillTextbox(this.elementId(key), value);
         }
 
-        await this.elementId("submit").click();
+        await this.elements.submitButton.click();
     }
 
-    @step("Verifying data")
+    @step("Verifying data presented in output field")
     async verifyData(expected: Record<string, string>) {
         const result = this.elementId("output");
 
         for (const [key, value] of Object.entries(expected)) {
-            await expect(this.elementId(key, result)).toContainText(value);
+            await expect(this.elementId(key, this.elements.outputField)).toContainText(value);
         }
+    }
+
+    @step("Verifying invalid email error message")
+    async verifyEmailError() {
+        await this.verifyErrorBorder(this.elementId("userEmail"));
+        await expect(this.elements.outputField, "Output field is not attached").toBeEmpty();
     }
 }

@@ -14,7 +14,7 @@ export class CheckboxPage extends BasePage {
         };
     }
 
-    @step("Expanding directory")
+    @step("Expanding directory fully")
     async expandAllTree() {
     while (await this.directory.folder('close').count() > 0) {
         await this.directory.folder('close').first().click();
@@ -22,7 +22,7 @@ export class CheckboxPage extends BasePage {
         }
     }
 
-    @step("Verifying chosen elements")
+    @step("Verifying chosen elements are correct")
     async verifyChosenElements() {
         const expected: string[] = [];
         const actual: string[] = [];
