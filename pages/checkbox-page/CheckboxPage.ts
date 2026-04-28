@@ -9,7 +9,7 @@ export class CheckboxPage extends BasePage {
 
     get directory() {
         return {
-            folder: (state: 'open ' | 'close') => this.page.locator(`.rc-tree-switcher_${state}`),
+            folder: (state: 'open' | 'close') => this.page.locator(`.rc-tree-switcher_${state}`),
             element: this.page.locator('.rc-tree-title'),
         };
     }
@@ -26,22 +26,18 @@ export class CheckboxPage extends BasePage {
     async verifyChosenElements() {
         const expected: string[] = [];
         const actual: string[] = [];
+        const formArray = async (locatorArr: Locator[], arr: string[]) => {
+            for (const element of locatorArr) {
+                const text = (await element.textContent()).replace('.doc', '').toLowerCase();
+                arr.push(text.replace(/\s/g, ''));
+            }
+            arr.sort();
+        };
         const expectedElements: Locator[] = await this.directory.element.all();
-        for (const element of expectedElements) {
-            const text = (await element.textContent()).replace('.doc', '').toLowerCase();
-            expected.push(text);
-        }
-        ;
+        await formArray(expectedElements, expected);
         const actualElements: Locator[] = await this.elementId('result').locator('//span').all();
         actualElements.shift();
-        for (const element of actualElements) {
-            const text = (await element.textContent()).replace('.doc', '').toLowerCase();
-            actual.push(text);
-        }
-        for (let i = 0; i < actual.length; i++) {
-            expect(expected.includes(actual[i].replace(/\s/g, '')), `Expected '${expected[i]}' to be in the list of expected elements`).toBe(true);
-        }
-
-        //expect(JSON.stringify(actual.sort())).toEqual(JSON.stringify(expected.sort()));
+        await formArray(actualElements, actual);
+        expect(expected, 'Expected elements match actual elements').toEqual(actual);
     }
     }
