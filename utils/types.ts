@@ -1,4 +1,4 @@
-export type TextboxFields =| "fullName" | "userEmail" | "currentAddress" | "permanentAddress";
+export type TextboxFields = "fullName" | "userEmail" | "currentAddress" | "permanentAddress";
 
 export type Tabs = 'elements' | 'forms';
 

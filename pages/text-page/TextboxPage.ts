@@ -26,8 +26,6 @@ export class TextboxPage extends BasePage {
 
     @step("Verifying data presented in output field")
     async verifyData(expected: Record<string, string>) {
-        const result = this.elementId("output");
-
         for (const [key, value] of Object.entries(expected)) {
             await expect(this.elementId(key, this.elements.outputField)).toContainText(value);
         }
